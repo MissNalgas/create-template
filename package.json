@@ -1,0 +1,36 @@
+{
+  "name": "@missnalgas/create-project",
+  "version": "0.0.3",
+  "type": "module",
+  "description": "Start project templates with one simple command",
+  "author": "Juan Aragon",
+  "license": "MIT",
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "create-project": "index.js"
+  },
+  "files": [
+    "index.js",
+    "dist",
+    "template-*/**/*"
+  ],
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MissNalgas/create-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MissNalgas/create-template/issues"
+  },
+  "homepage": "https://github.com/MissNalgas/create-template#readme"
+}

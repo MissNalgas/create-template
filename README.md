@@ -13,3 +13,14 @@ For yarn run:
 ```sh
 yarn create @missnalgas/project
 ```
+
+Start a git repository running
+```sh
+git init
+```
+
+and install packages using user preferred package manager. Eg
+
+```sh
+yarn
+```

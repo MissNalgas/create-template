@@ -1,6 +1,6 @@
 {
   "name": "@missnalgas/create-project",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "Start project templates with one simple command",
   "author": "Juan Aragon",

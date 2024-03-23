@@ -1,6 +1,7 @@
 'use client';
 import { useAuth } from '@/infrastructure/providers/auth';
 import { useUserState } from '@/infrastructure/store/user';
+import Link from 'next/link';
 
 export default function HomeTemplate() {
 	const user = useUserState((state) => state.user);
@@ -15,6 +16,7 @@ export default function HomeTemplate() {
 			>
 				Log out
 			</button>
+			<Link href="/profile">Go to profile</Link>
 		</div>
 	);
 }

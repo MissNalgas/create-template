@@ -12,13 +12,13 @@ import {
 	PUBLIC_ROUTES,
 	DEFAULT_PRIVATE_ROUTE,
 } from './const';
-import { useUserState } from '@/infrastructure/store/user';
+import { AuthenticatedState, useUserState } from '@/infrastructure/store/user';
 import { IUserContext } from './models';
 import { userService } from '@/application/services/user';
 import Loading from '@/infrastructure/components/loading';
 
 const authContext = createContext<IUserContext>({
-	isAuthenticated: false,
+	authState: AuthenticatedState.PENDING,
 	logIn: () => {},
 	logOut: () => {},
 });
@@ -32,11 +32,8 @@ export function AuthProvider({
 }: Readonly<{ children: React.ReactNode }>) {
 	const pathname = usePathname();
 	const router = useRouter();
-	const { user, setUser } = useUserState();
-	const [isLoading, setIsLoading] = useState(true);
-	const [hasHandledRedirect, setHasHandledRedirect] = useState(false);
-
-	const isAuthenticated = useMemo(() => !!user, [user]);
+	const { setUser, state: authState } = useUserState();
+	const [isValidRoute, setIsValidRoute] = useState(false);
 
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
@@ -46,24 +43,24 @@ export function AuthProvider({
 			.then((user) => {
 				setUser(user);
 			})
-			.catch(() => setUser(''))
-			.finally(() => setIsLoading(false));
+			.catch(() => setUser(''));
 	}, [setUser]);
 
 	useEffect(() => {
 		if (PUBLIC_ROUTES.some((route) => route.test(pathname))) {
-			if (isAuthenticated) {
+			if (authState === AuthenticatedState.AUTHENTICATED) {
 				router.replace(DEFAULT_PRIVATE_ROUTE);
+			} else if (authState === AuthenticatedState.UNAUTHENTICATED) {
+				setIsValidRoute(true);
 			}
 		} else {
-			if (!isAuthenticated) {
+			if (authState === AuthenticatedState.UNAUTHENTICATED) {
 				router.replace(DEFAULT_PUBLIC_ROUTE);
+			} else if (authState === AuthenticatedState.AUTHENTICATED) {
+				setIsValidRoute(true);
 			}
 		}
-		setTimeout(() => {
-			setHasHandledRedirect(true); // This is to ensure the router has been updated before showing the content
-		}, 500);
-	}, [pathname, router, isAuthenticated]);
+	}, [pathname, router, authState]);
 
 	const logIn = useCallback(
 		async (username: string) => {
@@ -76,22 +73,26 @@ export function AuthProvider({
 
 	const logOut = useCallback(() => {
 		window.localStorage.removeItem('token');
-		setUser('');
 		router.replace(DEFAULT_PUBLIC_ROUTE);
+		setUser('');
 	}, [setUser, router]);
 
 	const value = useMemo(
 		() => ({
-			isAuthenticated,
+			authState,
 			logIn,
 			logOut,
 		}),
-		[logIn, logOut, isAuthenticated],
+		[logIn, logOut, authState],
 	);
 
 	return (
 		<authContext.Provider value={value}>
-			{isLoading || !hasHandledRedirect ? <Loading /> : children}
+			{authState === AuthenticatedState.PENDING || !isValidRoute ? (
+				<Loading />
+			) : (
+				children
+			)}
 		</authContext.Provider>
 	);
 }

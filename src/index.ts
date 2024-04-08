@@ -62,8 +62,8 @@ function copy(src: string, dest: string) {
 
 const templates = [
 	{
-		name: "template-pwa",
-		display: "PWA",
+		name: "template-simple-auth",
+		display: "Simple auth",
 		color: yellow
 	}
 ]

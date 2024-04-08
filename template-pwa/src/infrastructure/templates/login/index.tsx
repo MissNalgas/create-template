@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/infrastructure/components/button';
 import { useAuth } from '@/infrastructure/providers/auth';
 import { useForm } from 'react-hook-form';
 
@@ -26,12 +27,10 @@ export default function LoginTemplate() {
 		>
 			<input
 				placeholder="Username"
-				className="border rounded h-8 px-2"
+				className="border rounded h-extraLarge px-2"
 				{...register('username')}
 			/>
-			<button className="bg-slate-600 rounded px-2 h-8 text-white">
-				Login
-			</button>
+			<Button>Login</Button>
 		</form>
 	);
 }

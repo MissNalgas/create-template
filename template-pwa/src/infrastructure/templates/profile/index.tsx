@@ -1,14 +1,16 @@
 'use client';
-import { useAuth } from '@/infrastructure/providers/auth';
 import Link from 'next/link';
+import { useAuth } from '@/infrastructure/providers/auth';
 
 export default function ProfileTemplate() {
 	const { authState } = useAuth();
 
 	return (
-		<main>
+		<main className="flex items-center justify-center min-h-screen flex-col">
 			<h1>Profile</h1>
-			<Link href="/">go to home</Link>
+			<Link className="text-alternative600 underline" href="/">
+				go to home
+			</Link>
 			<ul>
 				<li>
 					<b>Status: </b> {authState}

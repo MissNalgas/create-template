@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const instance = axios.create({
 	baseURL: API_URL,
-}); // Add here the defalt configuration
+}); // Add here the default configuration
 
 export const api: IHttpApi = {
 	get: instance.get,

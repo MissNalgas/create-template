@@ -10,7 +10,7 @@ export enum AuthenticatedState {
 interface IUserState {
 	user: IUser;
 	state: AuthenticatedState;
-	setUser: (user: string) => void;
+	setUser: (user: IUser) => void;
 }
 
 export const useUserState = create<IUserState>((set) => ({

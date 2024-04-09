@@ -2,7 +2,7 @@ import prompts from "prompts";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { green, red, reset, yellow} from "kolorist";
+import { blue, green, red, reset, yellow} from "kolorist";
 
 const cwd = process.cwd();
 
@@ -65,6 +65,11 @@ const templates = [
 		name: "template-simple-auth",
 		display: "Simple auth",
 		color: yellow
+	},
+	{
+		name: "template-ecommerce",
+		display: "E-commerce",
+		color: blue,
 	}
 ]
 

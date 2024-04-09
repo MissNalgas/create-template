@@ -1,0 +1,31 @@
+{
+	"name": "My App",
+	"short_name": "My App",
+	"start_url": "/",
+	"id": "/",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "/android-chrome-144x144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		}
+	],
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff",
+	"screenshots": [
+		{
+			"src": "/wide.jpg",
+			"sizes": "1902x856",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "Desktop screenshot"
+		},
+		{
+			"src": "/portrait.jpg",
+			"sizes": "371x665",
+			"type": "image/jpeg",
+			"label": "Mobile screenshot"
+		}
+	]
+}

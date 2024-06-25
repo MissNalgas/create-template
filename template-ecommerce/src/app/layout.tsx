@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import '@mantine/core/styles.css';
 import MainContainer from '@/infrastructure/providers/container/mainContainer';
+import { ColorSchemeScript } from '@mantine/core';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -43,6 +45,7 @@ export default function RootLayout({
 				/>
 				<meta name="msapplication-TileColor" content="#ffffff" />
 				<meta name="theme-color" content="#ffffff" />
+				<ColorSchemeScript />
 			</head>
 			<body className={inter.className}>
 				<MainContainer>{children}</MainContainer>

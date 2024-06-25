@@ -11,6 +11,7 @@ import {
 	DEFAULT_PUBLIC_ROUTE,
 	PUBLIC_ROUTES,
 	DEFAULT_PRIVATE_ROUTE,
+	MIXED_ROUTES,
 } from './const';
 import { AuthenticatedState, useUserState } from '@/infrastructure/store/user';
 import { IUserContext } from './models';
@@ -47,7 +48,9 @@ export function AuthProvider({
 	}, [setUser]);
 
 	useEffect(() => {
-		if (PUBLIC_ROUTES.some((route) => route.test(pathname))) {
+		if (MIXED_ROUTES) {
+			setIsValidRoute(true);
+		} else if (PUBLIC_ROUTES.some((route) => route.test(pathname))) {
 			if (authState === AuthenticatedState.AUTHENTICATED) {
 				router.replace(DEFAULT_PRIVATE_ROUTE);
 			} else if (authState === AuthenticatedState.UNAUTHENTICATED) {
